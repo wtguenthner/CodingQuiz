@@ -7,21 +7,43 @@ nav{
 nav button{
     border:none;
     background-color: white;
-    color: purple;
+    color: darkblue;
     font-size: 15pt;
+}
+button a{
+    text-decoration: none;
+    color: darkblue;
 }
 
 main{
 
     margin:20vh;
     text-align: center;
+    padding-bottom:0;
 
 }
 button{
 
-    background-color: purple;
+    background-color: darkblue;
     color:white;
     border-radius: 8px;
     padding:5px;
     font-size: 25px;
+}
+
+button:hover{
+    opacity:40%;
+}
+
+h4{
+    font-size: 28px;
+    color: darkblue;
+}
+
+h5{
+    font-size: 24px;
+}
+
+p{
+    text-align: center;
 }
