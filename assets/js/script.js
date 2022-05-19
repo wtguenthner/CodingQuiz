@@ -1,11 +1,11 @@
-var time = 60;
+var time = 50;
 var qi = -1;
 var points = 0;
 var clockID;
 
 
 
-// var answer = document.getElementById
+
 var main = document.querySelector("main");
 var message = document.getElementById("message");
 var highscores = document.getElementById("highscores");
@@ -50,11 +50,10 @@ function handleQuiz() {
 function handleQuestion() {
     qi++
     //Stops questions and ends the quiz once the iterator is larger than the number of questions available.
-    if (qi > 4) {
+    if (qi >= questions.length) {
         endQuiz();
         return
     }
-
     //Adds questions to the page
     let { Q, A, C } = questions[qi];
     main.innerHTML = `<h1>${Q}</h1>`;
@@ -62,7 +61,6 @@ function handleQuestion() {
     main.innerHTML += `<button value = "B" onclick="checkAnswer(event,qi)">${A[1]}</button>` + `<br></br>`;
     main.innerHTML += `<button value = "C" onclick="checkAnswer(event,qi)">${A[2]}</button>` + `<br></br>`;
     main.innerHTML += `<button value = "D" onclick="checkAnswer(event,qi)">${A[3]}</button>`;
-
 };
 
 //Checks the users guess and compares to the answer
@@ -141,16 +139,23 @@ function showHighScores() {
     //Resets content content of the main tag and the highscore list
     main.textContent = " ";
     highscores.textContent = " ";
+    initialList = JSON.parse(localStorage.getItem('initial'));
+    pointList = JSON.parse(localStorage.getItem('points'));
     //Displays the highscores
     highscores.setAttribute("class", "show");
     highscores.innerHTML += `<h2>High Scores</h2>`
-    highscores.innerHTML += `<li>` + JSON.parse(localStorage.getItem('initial')) + `</li>`;
-    highscores.innerHTML += `<br><li>` + JSON.parse(localStorage.getItem('points')) + `</li>`
+    //Adds each highscore to the list
+    for(var x=0; x < initialList.length; x++){
+        highscores.innerHTML+=  initialList[x] + `&emsp;&emsp;&emsp;&emsp;` + pointList[x] + '</br>'
+    }
+   
     //Adds button to return to beginning of quiz
     highscores.innerHTML += `<br><button id="goBack"><a href="./index.html">Go Back</a></button>
         <button onclick="clearStorage()">Clear Highscore</button>`
-}
-function clearStorage() {
 
+}
+//Clears highscore list
+function clearStorage() {
     localStorage.clear();
+    showHighScores();
 }
