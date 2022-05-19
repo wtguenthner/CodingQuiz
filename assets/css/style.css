@@ -35,7 +35,7 @@ button:hover{
     opacity:40%;
 }
 
-h4{
+h4,#highscores{
     font-size: 28px;
     color: darkblue;
 }
@@ -46,4 +46,23 @@ h5{
 
 p{
     text-align: center;
+}
+.hidden{
+    display:none;
+}
+.show{
+    justify-content: center;
+}
+#goBack a{
+    color:white;
+}
+li{
+    font-size: 24px;
+    display:inline-flex;
+    color:white;
+    background-color: darkblue;
+    width:fit-content;
+    margin-bottom: 20px;
+    
+    
 }
