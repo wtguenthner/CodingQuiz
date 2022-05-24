@@ -1,14 +1,11 @@
-var time = 50;
+var time = 60;
 var qi = -1;
 var points = 0;
 var clockID;
-
-
-
-
 var main = document.querySelector("main");
 var message = document.getElementById("message");
 var highscores = document.getElementById("highscores");
+
 
 //Sets an array for questions. Q stands for questions, A stands for available answers, C stands for correct answer
 var questions = [
@@ -24,7 +21,7 @@ var questions = [
     },
     {
         Q: "What is the main purpose of APIs?",
-        A: ["1. Enhancing the colors and styles of HTML", "2. To define the meaning and structure of web content", "3. Deliver user responses to a system and the systems response back to the user", "4. Resetting storage on a webpage to allow the user to start from scratch"],
+        A: ["1. Enhancing the colors and styles of HTML", "2. To define the meaning and structure of web content", "3. Deliver user responses to a system and the system's response back to the user", "4. Resetting storage on a webpage to allow the user to start from scratch"],
         C: "C"
     },
     {
@@ -107,7 +104,7 @@ function endQuiz() {
     main.innerHTML = `<h4>Quiz Complete</h4>`
     main.innerHTML += `<h5>Your final score is: ` + points + `</h5>`;
     time = 0;
-    main.innerHTML += `<input type="text" id="initials" placeholder = "Enter Initials" >
+    main.innerHTML += `<input type="text" id="initials" placeholder = "Enter Initials">
         <button id="submitScore" onClick = "addScore(points)">Submit</button>`
 }
 
@@ -123,17 +120,29 @@ function addScore(points) {
     }
     //Stores local storage of points into a variable and parses it
     var pointList = JSON.parse(localStorage.getItem('points'));
+
     //Add the new score to the array of points
     pointList.push(points);
     localStorage.setItem('points', JSON.stringify(pointList));
 
     //Stores local storage of initials into a variable and parses it
     var initialList = JSON.parse(localStorage.getItem('initial'));
+
     //Adds the new initials to the array of initials
     initialList.push(initials);
-    localStorage.setItem('initial', JSON.stringify(initialList))
+    localStorage.setItem('initial', JSON.stringify(initialList));
     showHighScores();
 }
+
+
+// let init = eval(localStorage.initials)
+// let score = eval(localStorage.points)
+// let temp = score.map(x=>x);
+// score.sort()
+// let temp2 = []
+// score.forEach(x=>temp2.push(init[temp.indexOf(x)]))
+// console.log(temp2,score);
+
 
 function showHighScores() {
     //Resets content content of the main tag and the highscore list
@@ -145,10 +154,11 @@ function showHighScores() {
     highscores.setAttribute("class", "show");
     highscores.innerHTML += `<h2>High Scores</h2>`
     //Adds each highscore to the list
+    if(initialList != null){
     for(var x=0; x < initialList.length; x++){
         highscores.innerHTML+=  initialList[x] + `&emsp;&emsp;&emsp;&emsp;` + pointList[x] + '</br>'
     }
-   
+}
     //Adds button to return to beginning of quiz
     highscores.innerHTML += `<br><button id="goBack"><a href="./index.html">Go Back</a></button>
         <button onclick="clearStorage()">Clear Highscore</button>`
@@ -157,5 +167,5 @@ function showHighScores() {
 //Clears highscore list
 function clearStorage() {
     localStorage.clear();
-    showHighScores();
+    showHighScores();    
 }
